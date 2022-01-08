@@ -9,6 +9,7 @@ use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
+use yii\helpers\Url;
 
 BasicAsset::register($this);
 ?>
@@ -17,12 +18,28 @@ BasicAsset::register($this);
 <html  class="h-100">
 <head>
 	<?php $this->head() ?>
+	<?php $this->registerCsrfMetaTags() ?>
 </head>
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
 
 <header>
-123
+<div class="div">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+           <?=Html::a('link text', Url::to('123', true))?>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+        </li>
+    </ul>
+</div>
 </header>
 
 <main role="main" class="flex-shrink-0">
@@ -32,7 +49,7 @@ BasicAsset::register($this);
 </main>
 
 <footer class="footer mt-auto py-3 text-muted">
-    789
+    footer
 </footer>
 
 <?php $this->endBody() ?>

@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use yii\web\Controller;
+use Yii;
+use app\models\TestForm;
 
 class PostController extends Controller
 {
@@ -10,8 +12,31 @@ class PostController extends Controller
 
 	public function actionIndex($post_id = null)
     {
-        // $this->layout = 'basic'; назначение шаблона локально
-		return $this->render('index',compact('post_id'));
+
+		$model = new TestForm();
+
+		if ($model->load(Yii::$app->request->post()))
+		{
+			if ($model->validate()){
+				Yii::$app->session->setFlash('success', 'Получилось!!');
+				return $this->refresh();
+			} else {
+				Yii::$app->session->setFlash('error', 'Бяда');
+			}
+		}
+
+
+
+
+
+		if (Yii::$app->request->isAjax){
+			return 'test';
+        }
+
+		$this->view->registerMetaTag(['name'=> 'description' , 'content' => '123123123123']);
+
+		// $this->layout = 'basic'; назначение шаблона локально
+		return $this->render('test',compact('model'));
     }
 
 }
